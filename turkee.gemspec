@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   s.test_files    = `git ls-files -- {spec}/*`.split("\n")
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
 
-  s.homepage = %q{http://github.com/aantix/turkee}
+  s.homepage = %q{http://github.com/Numerico/turkee}
   s.post_install_message = %q{
   ========================================================================
   Turkee Installation Complete.
@@ -44,16 +44,17 @@ Gem::Specification.new do |s|
   s.summary = %q{Turkee makes dealing with Amazon's Mechnical Turk a breeze.}
 
   s.add_dependency(%q<lockfile>)
-  s.add_dependency(%q<rails>, [">= 3.1.1"])
-  s.add_dependency(%q<rturk>, [">= 2.4.0"])
+  s.add_dependency(%q<rails>, [">= 4.0.0"])
+  s.add_dependency(%q<rturk>, [">= 2.4.1"])
+  s.add_dependency 'mongoid', '>= 4.0.0.alpha1'
 
   s.add_development_dependency "mocha"
-  s.add_development_dependency "sqlite3"
   s.add_development_dependency "spork"
 
   # RSpec has to be in both test and development so that rake tasks and generators
   # are available without having to explicitly switch the environment to 'test'
-  s.add_development_dependency 'factory_girl', '>= 1.3.2'
-  s.add_development_dependency "rspec-rails", "~> 2.6"
+  s.add_development_dependency 'factory_girl', '>= 4.3.0'
+  s.add_development_dependency "rspec-rails", "~> 2.14.0"
+
 end
 

@@ -1,19 +1,20 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Dummy</title>
-
-  <% if params[:type] == 'prototype' %>
-    <%= javascript_include_tag 'prototype', 'prototype_nested_form', 'prototype_events_test' %>
-  <% else %>
-    <%= javascript_include_tag 'jquery', 'jquery_nested_form', 'jquery_events_test' %>
-  <% end %>
+  <meta charset="utf-8" />
+  <title>Turkee Dummy app</title>
+  <%= stylesheet_link_tag :all %>
+  <%= javascript_include_tag :all %>
+  <%= csrf_meta_tag %>
 </head>
 <body>
+  <h1><%= link_to 'Dummy app', '/' %></h1>
 
-<%= yield %>
+  <% flash.each do |name, msg| %>
+    <%= content_tag :p, msg, :class => (name == 'error' ? 'error' : 'notice') %>
+  <% end %>
 
-<div id="console"></div>
+  <%= yield %>
 
 </body>
 </html>

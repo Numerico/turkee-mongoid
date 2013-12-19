@@ -1,6 +1,6 @@
 require 'rubygems'
+gemfile = File.expand_path('../../../../Gemfile', __FILE__)
 
-gemfile = ENV['BUNDLE_GEMFILE'] || File.expand_path('../../../../Gemfile', __FILE__)
 if File.exist?(gemfile)
   ENV['BUNDLE_GEMFILE'] = gemfile
   require 'bundler'

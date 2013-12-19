@@ -5,12 +5,28 @@ require 'lockfile'
 require 'active_record'
 require "active_support/core_ext/object/to_query"
 require 'action_controller'
+require 'mongoid'
 
 module Turkee
 
-  class TurkeeTask < ActiveRecord::Base
-    attr_accessible :sandbox, :hit_title, :hit_description, :hit_reward, :hit_num_assignments, :hit_lifetime, :hit_duration,
-                    :form_url, :hit_url, :hit_id, :task_type, :complete if ActiveRecord::VERSION::MAJOR < 4
+  class TurkeeTask
+    include Mongoid::Document
+    include Mongoid::Timestamps
+
+    field :sandbox, type: Boolean
+    field :hit_title, type: String #TODO text
+    field :hit_description, type: String #TODO text
+    field :hit_reward, type: BigDecimal # :precision => 10, :scale => 2
+    field :hit_num_assignments, type: Integer
+    field :hit_lifetime, type: Integer
+    field :hit_duration, type: Integer
+    field :form_url, type: String
+    field :hit_url, type: String
+    field :hit_id, type: String
+    field :task_type, type: String
+    field :complete, type: Boolean
+    field :completed_assignments, type: Integer, default: 0
+    field :expired, type: Integer
 
     HIT_FRAMEHEIGHT = 1000
 

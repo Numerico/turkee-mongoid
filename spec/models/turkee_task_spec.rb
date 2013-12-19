@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Turkee::TurkeeTask do
-  class TestTask < ActiveRecord::Base
+  class TestTask
     def self.abstract_class
       true
     end
@@ -9,7 +9,7 @@ describe Turkee::TurkeeTask do
     attr_accessor :description
   end
 
-  class Survey < ActiveRecord::Base
+  class Survey
     def self.abstract_class
       true
     end

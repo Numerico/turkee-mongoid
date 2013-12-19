@@ -1,0 +1,21 @@
+defaults: &defaults
+  hosts: 
+    - '127.0.0.1'
+
+development:
+  sessions:
+    default:
+      <<: *defaults
+      database: turkee_dummy_dev
+
+test:
+  sessions:
+    default:
+      <<: *defaults
+      database: "turkee_dummy_test"
+
+production:
+  sessions:
+    default:
+      <<: *defaults
+      database: turkee_dummy
