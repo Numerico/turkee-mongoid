@@ -1,7 +1,13 @@
 module Turkee
-  class TurkeeStudy < ActiveRecord::Base
+  class TurkeeStudy
+    include Mongoid::Document
+    include Mongoid::Timestamps
+
+    field :turkee_task_id, type: Integer
+    field :feedback, type: String
+    field :gold_response, type: String
+
     GOLD_RESPONSE_INDEX = 3
-    attr_accessible :turkee_task_id, :feedback, :gold_response if ActiveRecord::VERSION::MAJOR < 4
 
     def approve?
       words = feedback.split(/\W+/)

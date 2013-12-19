@@ -1,8 +1,12 @@
-require 'active_record'
-
 module Turkee
-  class TurkeeImportedAssignment < ActiveRecord::Base
-    attr_accessible :assignment_id, :turkee_task_id, :worker_id, :result_id if ActiveRecord::VERSION::MAJOR < 4
+  class TurkeeImportedAssignment
+    include Mongoid::Document
+    include Mongoid::Timestamps
+
+    field :assignment_id, type: String # TODO validates assignment_id, uniqueness: true ?
+    field :turkee_task_id, type: Integer
+    field :worker_id, type: String
+    field :result_id, type: Integer
 
     def self.record_imported_assignment(assignment, result, turk)
       TurkeeImportedAssignment.create!(:assignment_id => assignment.id,
