@@ -2,14 +2,14 @@
 $:.push File.expand_path("../lib", __FILE__)
 
 Gem::Specification.new do |s|
-  s.name = %q{turkee}
+  s.name = %q{turkee-mongoid}
   s.version = "2.0.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = [%q{Jim Jones}]
+  s.authors = [%q{Jim Jones}, %q{Numerico}]
   s.date = %q{2013-05-14}
-  s.description = %q{Turkee will help you to easily create usability studies, post HITs, and retrieve the user entered values from Mechanical Turk.}
-  s.email = %q{jjones@aantix.com}
+  s.description = %q{Mongoid port of Turkee. The same as Turkee, it creates usability studies, posts HITs, and retrieves the user entered values from Mechanical Turk.}
+  s.email = %q{webmaster@numerica.cl}
   s.extra_rdoc_files = [
     "LICENSE",
     "README.rdoc"
@@ -22,26 +22,26 @@ Gem::Specification.new do |s|
   s.homepage = %q{http://github.com/Numerico/turkee}
   s.post_install_message = %q{
   ========================================================================
-  Turkee Installation Complete.
+  Turkee Mongoid Installation Complete.
   ------------------------------------------------------------------------
 
-  If you're upgrading, be sure to execute the following to receive the
-  latest migration changes.
-    rails g turkee --skip
+  BEWARE! THIS GEM ISN'T ACTIVELY MAINTAINED
 
-  (the skip flag will ensure that you don't overwrite prior
-  Turkee initializers and migrations)
-
-
-  For instructions on gem usage, visit:
-    http://github.com/aantix/turkee#readme
+  If you got it from RubyGems, it might have gotten outdated.
+  To be sure, you can fork it on GitHub:
+    https://github.com/Numerico/turkee
+  add Turkee as a remote:
+    git remote add turkee git@github.com:aantix/turkee.git
+  and then pull it
+    git pull turkee master
+  any new features (needing conversion) would then appear
 
   ========================================================================
-  -- Gobble, gobble.
+  -- Gobble gobble too.
   }
   s.require_paths = [%q{lib}]
   s.rubygems_version = %q{1.8.1}
-  s.summary = %q{Turkee makes dealing with Amazon's Mechnical Turk a breeze.}
+  s.summary = %q{This is a port of Turkee gem to use Mongoid instead of Active Record.}
 
   s.add_dependency(%q<lockfile>)
   s.add_dependency(%q<rails>, [">= 4.0.0"])

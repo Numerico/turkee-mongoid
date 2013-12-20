@@ -1,3 +1,27 @@
+== MONGOID
+
+This is a Mongoid port of Turkee gem, for the original one and credits see {aantix/turkee}[https://github.com/aantix/turkee] 
+
+== MAINTENANCE
+
+  To be honest, this gem won't get much maintenance.
+
+  If Turkee adds new features, please fork this repository and:  
+
+  1) Add Turkee as a remote:
+
+      git remote add turkee git@github.com:aantix/turkee.git
+      
+  2) Pull it
+
+      git pull turkee master
+
+  3) Run tests
+
+      bundle exec rspec
+
+  Any new features would then appear, with new tests failing probably: that's where you comme into scene ;)
+
 == RAILS 4 SUPPORT
 Rails 4 support is currently being tested.  To try it out, just use Turkee's master branch. In your Gemfile, add the following :
     gem 'turkee', :git => 'https://github.com/aantix/turkee.git', branch: 'master'
