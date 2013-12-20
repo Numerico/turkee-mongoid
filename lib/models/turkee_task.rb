@@ -28,7 +28,7 @@ module Turkee
 
     HIT_FRAMEHEIGHT = 1000
 
-    scope :unprocessed_hits, lambda { where('complete = ? AND sandbox = ?', false, RTurk.sandbox?) }
+    scope :unprocessed_hits, lambda { where(complete: false, sandbox: RTurk.sandbox?) }
 
     # Use this method to go out and retrieve the data for all of the posted Turk Tasks.
     #  Each specific TurkeeTask object (determined by task_type field) is in charge of
@@ -36,6 +36,7 @@ module Turkee
     def self.process_hits(turkee_task = nil)
 
       begin
+
         # Using a lockfile to prevent multiple calls to Amazon.
         Lockfile.new('/tmp/turk_processor.lock', :max_age => 3600, :retries => 10) do
 
@@ -46,6 +47,7 @@ module Turkee
 
             callback_models = Set.new
             hit.assignments.each do |assignment|
+
               next unless submitted?(assignment.status)
               next if assignment_exists?(assignment)
 
@@ -210,7 +212,7 @@ module Turkee
     end
 
     def self.assignment_exists?(assignment)
-      TurkeeImportedAssignment.find_by_assignment_id(assignment.id).present?
+      TurkeeImportedAssignment.where(assignment_id: assignment.id).exists?
     end
 
     def completed_assignments?
