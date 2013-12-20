@@ -1,11 +1,13 @@
 require 'spec_helper'
 
 describe Turkee::TurkeeTask do
+
   class TestTask
+    include Mongoid::Document
+
     def self.abstract_class
       true
     end
-
     attr_accessor :description
   end
 
@@ -111,7 +113,7 @@ describe Turkee::TurkeeTask do
   end
 
   describe "#find_model" do
-    it "should return a turkee_task mode " do
+    it "should return a turkee_task model" do
       returned_data = {:submit => 'Create', "test_task" => {:description => "desc"}}
       Turkee::TurkeeTask.find_model(returned_data).should == TestTask
     end

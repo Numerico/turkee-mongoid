@@ -241,7 +241,7 @@ module Turkee
       param_hash.each do |k, v|
         if v.is_a?(Hash)
           model = k.to_s.camelize.constantize rescue next
-          return model if model.descends_from_active_record? rescue next
+          return model if model.ancestors.include?(Mongoid::Document) rescue next
         end
       end
       nil
