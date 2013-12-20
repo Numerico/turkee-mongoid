@@ -35,43 +35,34 @@ module Turkee
     #  accepting/rejecting the assignment and importing the data into their respective tables.
     def self.process_hits(turkee_task = nil)
 
-      begin
+      turks = task_items(turkee_task)
 
-        # Using a lockfile to prevent multiple calls to Amazon.
-        Lockfile.new('/tmp/turk_processor.lock', :max_age => 3600, :retries => 10) do
+      turks.each do |turk|
+        hit = RTurk::Hit.new(turk.hit_id)
 
-          turks = task_items(turkee_task)
+        callback_models = Set.new
+        hit.assignments.each do |assignment|
 
-          turks.each do |turk|
-            hit = RTurk::Hit.new(turk.hit_id)
+          next unless submitted?(assignment.status)
+          next if assignment_exists?(assignment)
 
-            callback_models = Set.new
-            hit.assignments.each do |assignment|
+          model, param_hash = map_imported_values(assignment, turk.task_type)
+          next if model.nil?
 
-              next unless submitted?(assignment.status)
-              next if assignment_exists?(assignment)
+          callback_models << model
 
-              model, param_hash = map_imported_values(assignment, turk.task_type)
-              next if model.nil?
+          result = save_imported_values(model, param_hash)
 
-              callback_models << model
+          # If there's a custom approve? method, see if we should approve the submitted assignment
+          #  otherwise just approve it by default
+          turk.process_result(assignment, result)
 
-              result = save_imported_values(model, param_hash)
-
-              # If there's a custom approve? method, see if we should approve the submitted assignment
-              #  otherwise just approve it by default
-              turk.process_result(assignment, result)
-
-              TurkeeImportedAssignment.record_imported_assignment(assignment, result, turk)
-            end
-
-            turk.set_expired?(callback_models) if !turk.set_complete?(hit, callback_models)
-          end
+          TurkeeImportedAssignment.record_imported_assignment(assignment, result, turk)
         end
-      rescue Lockfile::MaxTriesLockError => e
-        logger.info "TurkTask.process_hits is already running or the lockfile /tmp/turk_processor.lock exists from an improperly shutdown previous process. Exiting method call."
-      end
 
+        turk.set_expired?(callback_models) if !turk.set_complete?(hit, callback_models)
+      end
+        
     end
 
     def self.save_imported_values(model, param_hash)
