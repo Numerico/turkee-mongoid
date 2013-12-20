@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    turkee (2.0.2)
+    turkee-mongoid (2.0.2)
       lockfile
       mongoid (>= 4.0.0.alpha1)
       rails (>= 4.0.0)
@@ -133,4 +133,4 @@ DEPENDENCIES
   mocha
   rspec-rails (~> 2.14.0)
   spork
-  turkee!
+  turkee-mongoid!

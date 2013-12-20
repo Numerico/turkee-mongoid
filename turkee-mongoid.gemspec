@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   s.test_files    = `git ls-files -- {spec}/*`.split("\n")
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
 
-  s.homepage = %q{http://github.com/Numerico/turkee}
+  s.homepage = %q{http://github.com/Numerico/turkee-mongoid}
   s.post_install_message = %q{
   ========================================================================
   Turkee Mongoid Installation Complete.

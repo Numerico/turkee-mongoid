@@ -32,7 +32,7 @@ begin
   }
 
   Gem::Specification.new do |gem|
-    gem.name = "turkee"
+    gem.name = "turkee-mongoid"
     gem.summary = "Turkee makes dealing with Amazon's Mechnical Turk a breeze."
     gem.description = "Turkee will help you to create your Rails forms, post the HITs, and retrieve the user entered values from Mechanical Turk."
     gem.email = "jjones@aantix.com"

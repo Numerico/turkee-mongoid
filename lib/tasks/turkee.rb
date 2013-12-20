@@ -1,5 +1,5 @@
 require 'rake'
-require 'turkee'
+require 'turkee-mongoid'
 
 namespace :turkee do
   desc "Post your form to Mechanical Turk (HIT). Task takes the application's host URL, HIT title, HIT description, model name, number of responses, reward for each response, number of days the HIT should be valid, and number of hours a worker has to complete the HIT."
