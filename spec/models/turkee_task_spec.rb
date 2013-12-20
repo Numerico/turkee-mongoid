@@ -9,15 +9,6 @@ describe Turkee::TurkeeTask do
     attr_accessor :description
   end
 
-  class Survey
-    def self.abstract_class
-      true
-    end
-
-    def self.hit_complete(hit)
-    end
-  end
-
   describe ".completed_assignments?" do
     it "is not complete" do
       turkee_task = FactoryGirl.create(:turkee_task)
